@@ -1,0 +1,32 @@
+{% extends "tours/base.html" %}
+{% load custom_tags %}
+{% block container %}
+  <main class="container mt-3">
+    <h1 class="display-5 mt-4">Летим {{ departure|word_title }}</h1>
+    <p class="mb-4">Найдено {{ departure_tours|length }} тур{{ departure_tours|length|pluralize_ru1:"'',а,ов" }},
+      от {{sorted_price|first|last|lookup:"price"|price_format}}
+      до {{sorted_price|last|last|lookup:"price"|price_format}} и
+      от {% with sorted_nights|first|last|lookup:"nights" as min_nights %} {{ min_nights }}
+      ноч{{min_nights|pluralize_ru2:"и,ей"}} {% endwith %}
+      до {% with sorted_nights|last|last|lookup:"nights" as max_nights %} {{ max_nights }}
+      ноч{{max_nights|pluralize_ru2:"и,ей"}} {% endwith %} {{ min_description }}</p>
+    <!-- CARDS -->
+    <div class="row mt-5">
+      {% for key, value in departure_tours.items %}
+      <div class="col-4">
+        <div class="card mb-4" >
+          <img src="{{ value.picture }}" class="card-img-top rounded-lg" width="300" height="200" alt="">
+          <div class="card-header py-1 pl-4">
+          {{ value.date }}, {{ value.nights }} {{ value.nights|pluralize_ru1:"день,дня,дней" }}, {{ value.price|price_format }} P
+          </div>
+          <div class="card-body">
+            <h2 class="h5 card-title">{{ value.title }}</h2>
+            <p class="card-text">{{ value.description|slice:":182" }}...</p>
+            <a href="/tour/{{ key }}" class="btn btn-sm btn-primary">Подробнее</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+{% endblock %}

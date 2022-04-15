@@ -1,0 +1,21 @@
+.block2 {
+      position: relative;
+      left:0px;
+      top: 0px;
+      width:inherit;
+      height:inherit;
+      z-index:1;
+    }
+.block2::before {
+      content:"";
+      opacity: 0.3;
+      position: absolute;
+      z-index:-1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background:url(https://img3.goodfon.ru/original/800x480/2/7a/tropical-sunset-paradise-1710.jpg);
+      background-size:cover;
+      border-radius: 10px
+    }

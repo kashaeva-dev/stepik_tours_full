@@ -1,0 +1,34 @@
+{% extends "tours/base.html" %}
+{% load static %}
+{% load custom_tags %}
+{% block container %}
+<main class="container mt-3">
+  <!-- HERO -->
+    <section class="jumbotron block2 text-center mt-4" style="background-position: center center">
+      <h1 class="display-4"><strong>Всякие туры</strong></h1>
+    <p class="lead">Для тех, кого отвлекают дома</p>
+    <p class="mt-5 w-50 mx-auto">Лучшие направления, где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами</p>
+  </section>
+  <!-- CARDS -->
+  <div class="row mt-5">
+    {% for key, value in random_tours.items %}
+    <div class="col-4">
+      <div class="card mb-4">
+        <div class="embed-responsive embed-responsive-16by9">
+          <img class="card-img-top embed-responsive-item" src="{{ value.picture }}" alt="" />
+        </div>
+        <div class="card-header py-1 pl-4">
+        {{ value.date }}, {{ value.nights }} {{ value.nights|pluralize_ru1:"день,дня,дней" }}, {{ value.price|price_format }} P
+        </div>
+        <div class="card-body">
+          <h2 class="card-title my-1">{{ value.country }}</h2>
+          <h2 class="h5 card-title">{{ value.title }} {{ value.stars }}★</h2>
+          <p class="card-text">{{ value.description|slice:":182" }}...</p>
+          <a href="/tour/{{ key }}" class="btn btn-sm btn-primary">Подробнее</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

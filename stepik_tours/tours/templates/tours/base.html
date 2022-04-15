@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{ gen_info.title }}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+  <style>
+    .block2 {
+      position: relative;
+      left:0px;
+      top: 0px;
+      width:inherit;
+      height:inherit;
+      z-index:1;
+    }
+    .block2::before {
+      content:"";
+      opacity: 0.3;
+      position: absolute;
+      z-index:-1;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background:url(https://img3.goodfon.ru/original/800x480/2/7a/tropical-sunset-paradise-1710.jpg);
+      background-size:cover;
+      border-radius: 10px
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container mt-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">{{ gen_info.title }}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            {% for key, value in departures.items %}
+            <li class='nav-item {% if key in request.path %} active{% endif %}'>
+            <a class="nav-link" href="/departure/{{ key }}">{{ value }}</a>
+          </li>{% endfor %}
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <div class="container">
+    {% block container %} {% endblock %}
+  </div>
+</body>
+</html>
