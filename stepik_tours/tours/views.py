@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from tours import data
 import random
+
+from django.shortcuts import render
+
+from tours import data
 
 
 def main_view(request):
