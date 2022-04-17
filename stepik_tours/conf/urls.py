@@ -18,6 +18,10 @@ from django.urls import path
 
 import tours.views as tours_views
 
+
+handler404 = tours_views.custom_handler404
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", tours_views.main_view, name="main"),
